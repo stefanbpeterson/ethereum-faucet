@@ -6,6 +6,16 @@ contract Faucet {
     uint public numOfFunders;
     mapping(address => bool) public funders;
     mapping(uint => address) public lutFunders;
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
 
     receive() external payable {
 
