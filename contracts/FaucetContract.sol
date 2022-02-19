@@ -1,25 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-contract Faucet {
+import "./OnlyOwner.sol";
+import "./Logger.sol";
+
+contract Faucet is OnlyOwner, Logger {
 
     uint public numOfFunders;
     mapping(address => bool) public funders;
     mapping(uint => address) public lutFunders;
-    address public owner;
-
-    constructor() {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
-
-    function transferOwnership(address newOwner) external onlyOwner {
-        owner = newOwner;
-    }
 
     receive() external payable {
 
@@ -28,6 +17,10 @@ contract Faucet {
     modifier mustBeBelow(uint withdrawAmount) {
         require(withdrawAmount <= 1000000000000000000, "Cannot withdraw more than 1 ether.");
         _;
+    }
+
+    function emitLog() external override pure returns(bytes32) {
+        return "Stefan";
     }
 
     function addFunds() external payable {
@@ -40,7 +33,7 @@ contract Faucet {
         }
     }
 
-    function withdrawFunds(uint withdrawAmount) external mustBeBelow(withdrawAmount) {
+    function withdrawFunds(uint withdrawAmount) external mustBeBelow(withdrawAmount) onlyOwner {
         payable(msg.sender).transfer(withdrawAmount);
     }
 
