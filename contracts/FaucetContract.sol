@@ -3,8 +3,9 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "./OnlyOwner.sol";
 import "./Logger.sol";
+import "./IFaucet.sol";
 
-contract Faucet is OnlyOwner, Logger {
+contract Faucet is OnlyOwner, Logger, IFaucet {
 
     uint public numOfFunders;
     mapping(address => bool) public funders;
