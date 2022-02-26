@@ -16,7 +16,6 @@ function App() {
     const loadProvider = async() => {
       const provider = await detectEthereumProvider()
       if(provider) {
-        provider.request({method: "eth_requestAccounts"})
         setweb3Api({
           provider,
           web3: new Web3(provider)
@@ -41,9 +40,11 @@ function App() {
     <>
       <div className="faucet-wrapper">
         <div className="faucet">
-          <span>Account:</span>
-          <h1>{ account ? account : "Not connected."}</h1>
-          <div className="balance-view is-size-2 mb-4">
+          <div className='is-flex is-align-items-center'>
+            <span className='mr-3'>Account:</span>
+            <h1>{ account ? account : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
+          </div>
+          <div className="balance-view is-size-2 my-4">
             Current Balance: <strong>10</strong>
           </div>
           <button className="button is-link is-rounded mr-2">Donate</button>
