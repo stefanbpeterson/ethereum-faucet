@@ -15,8 +15,8 @@ function App() {
   useEffect(() => {
     const loadProvider = async() => {
       const provider = await detectEthereumProvider()
-
       if(provider) {
+        provider.request({method: "eth_requestAccounts"})
         setweb3Api({
           provider,
           web3: new Web3(provider)
@@ -43,11 +43,11 @@ function App() {
         <div className="faucet">
           <span>Account:</span>
           <h1>{ account ? account : "Not connected."}</h1>
-          <div className="balance-view is-size-2">
+          <div className="balance-view is-size-2 mb-4">
             Current Balance: <strong>10</strong>
           </div>
-          <button className="btn mr-2">Donate</button>
-          <button className="btn">Withdraw</button>
+          <button className="button is-link is-rounded mr-2">Donate</button>
+          <button className="button is-primary is-rounded">Withdraw</button>
         </div>
       </div>
     </>
