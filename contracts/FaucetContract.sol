@@ -24,7 +24,7 @@ contract Faucet is OnlyOwner, Logger, IFaucet {
         return "Stefan";
     }
 
-    function addFunds() external payable {
+    function addFunds() override external payable {
         address funder = msg.sender;
 
         if(!funders[funder]) {
@@ -34,7 +34,7 @@ contract Faucet is OnlyOwner, Logger, IFaucet {
         }
     }
 
-    function withdrawFunds(uint withdrawAmount) external mustBeBelow(withdrawAmount) onlyOwner {
+    function withdrawFunds(uint withdrawAmount) override external mustBeBelow(withdrawAmount) onlyOwner {
         payable(msg.sender).transfer(withdrawAmount);
     }
 
