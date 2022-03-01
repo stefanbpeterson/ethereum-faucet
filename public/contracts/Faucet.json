@@ -18,7 +18,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -37,7 +38,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -50,7 +52,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -63,7 +66,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -76,7 +80,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -93,7 +98,8 @@
     },
     {
       "stateMutability": "payable",
-      "type": "receive"
+      "type": "receive",
+      "payable": true
     },
     {
       "inputs": [],
@@ -106,14 +112,16 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
       "name": "addFunds",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -139,7 +147,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -158,7 +167,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"addFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emitLog\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"funders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllFunders\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getFunderAtIndex\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"lutFunders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numOfFunders\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"test3\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"withdrawAmount\",\"type\":\"uint256\"}],\"name\":\"withdrawFunds\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/FaucetContract.sol\":\"Faucet\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/FaucetContract.sol\":{\"keccak256\":\"0x4394a6b5e8e52a0805baf29a1db959f1f7f64bdf6fdf4124333febeedb5f986f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a45572ec6552ece5d1b22a0ae6b329f3c98a9aeac14b5f3877e6cca3add59c0d\",\"dweb:/ipfs/QmcXiCwPokYihGPk7cvtGqUUJvdoruneAx4b9zQ6PpYPXa\"]},\"project:/contracts/IFaucet.sol\":{\"keccak256\":\"0x8171d3b57058891913efd0afe800d8a044918e5356efad7cca8c1fb9df703c89\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d621eb5e81641d635c434bb34097509416d20dba248d57d33601cb7df2d0f1ba\",\"dweb:/ipfs/QmTtnV9LiQj1caiDKCNZ5jaEqupGF9CLsGwAiJdZDe9YgE\"]},\"project:/contracts/Logger.sol\":{\"keccak256\":\"0x26f83f01927c8785492cf4a8c31251d317872623ac270d71f60ee15665077083\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://58ba314f43242d0414e0c1a07738797925132ad1abe8a8f6afa6db5f5cda07e9\",\"dweb:/ipfs/QmX4b74GRcdv5GEgsttAscK74VKgxbJ8JNuLrxDtVzkvi1\"]},\"project:/contracts/OnlyOwner.sol\":{\"keccak256\":\"0x9e57afa23ae3cade9b90cb6a075d6c9932311d6be0b443b70f64ff31caa7e734\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1abc47dc5d7033a1210929a12854f2376dedabd1edf3978fcef757850814c6cd\",\"dweb:/ipfs/QmW6onZcpL3ySdTfSNaNkFMipiyYetsNsH8XUpf1JsQ8bL\"]}},\"version\":1}",
@@ -6954,9 +6964,17 @@
     "name": "solc",
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x53753710c18205aEdB34be031DDe5caF1AbFCECd",
+      "transactionHash": "0x02c0b9e56e8a15b37ebf6a392596c5a83e64ecdfa00ac4bafc9e2217f5125010"
+    }
+  },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2022-02-27T20:39:40.094Z",
+  "updatedAt": "2022-03-01T04:14:37.514Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
