@@ -52,6 +52,14 @@ function App() {
 
     web3Api.contract && loadBalance()
   }, [web3Api])
+
+  const addFunds = async() => {
+    const { contract, web3 } = web3Api
+    await contract.addFunds({
+      from: account,
+      value: web3.utils.toWei("1", "ether")
+    })
+  }
   
 
   return (
@@ -63,9 +71,9 @@ function App() {
             <h1>{ account ? account : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
           </div>
           <div className="balance-view is-size-2 my-4">
-            Current Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
+            Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
           </div>
-          <button className="button is-link is-rounded mr-2">Donate</button>
+          <button onClick={addFunds} className="button is-link is-rounded mr-2">Donate 1 Ether</button>
           <button className="button is-primary is-rounded">Withdraw</button>
         </div>
       </div>
