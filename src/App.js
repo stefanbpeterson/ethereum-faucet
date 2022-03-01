@@ -11,7 +11,6 @@ function App() {
     web3: null,
     contract: null
   })
-
   const [account, setAccount] = useState(null)
   const [balance, setBalance] = useState(null)
   const [reload, setReload] = useState(false)
@@ -42,8 +41,9 @@ function App() {
       const accounts = await web3Api.web3.eth.getAccounts()
       setAccount(accounts[0])
     }
+
     web3Api.web3 && getAccount()
-  }, [web3Api.web3])
+  }, [web3Api.web3, reload])
 
   useEffect(() => {
     const loadBalance = async() => {
@@ -57,11 +57,20 @@ function App() {
 
   const addFunds = async() => {
     const { contract, web3 } = web3Api
-    
+
     await contract.addFunds({
       from: account,
       value: web3.utils.toWei("1", "ether")
     })
+
+    reloadHelper()
+  }
+
+  const withdrawFunds = async() => {
+    const { contract, web3 } = web3Api
+    const withdrawAmount = web3.utils.toWei("1", "ether")
+
+    await contract.withdrawFunds(withdrawAmount, {from: account})
 
     reloadHelper()
   }
@@ -79,7 +88,7 @@ function App() {
             Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
           </div>
           <button onClick={addFunds} className="button is-link is-rounded mr-2">Donate 1 Ether</button>
-          <button className="button is-primary is-rounded">Withdraw</button>
+          <button onClick={withdrawFunds} className="button is-primary is-rounded">Withdraw 1 Ether</button>
         </div>
       </div>
     </>

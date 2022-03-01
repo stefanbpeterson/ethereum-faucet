@@ -4,8 +4,9 @@ pragma solidity >=0.4.22 <0.9.0;
 import "./OnlyOwner.sol";
 import "./Logger.sol";
 import "./IFaucet.sol";
+import "./OnlyAdmin.sol";
 
-contract Faucet is OnlyOwner, Logger, IFaucet {
+contract Faucet is OnlyOwner, Logger, IFaucet, OnlyAdmin {
 
     uint public numOfFunders;
     mapping(address => bool) public funders;
@@ -34,7 +35,7 @@ contract Faucet is OnlyOwner, Logger, IFaucet {
         }
     }
 
-    function withdrawFunds(uint withdrawAmount) override external mustBeBelow(withdrawAmount) onlyOwner {
+    function withdrawFunds(uint withdrawAmount) override external mustBeBelow(withdrawAmount) onlyAdmin {
         payable(msg.sender).transfer(withdrawAmount);
     }
 
