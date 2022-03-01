@@ -14,6 +14,8 @@ function App() {
 
   const [account, setAccount] = useState(null)
 
+  const [balance, setBalance] = useState(null)
+
   useEffect(() => {
     const loadProvider = async() => {
 
@@ -40,6 +42,16 @@ function App() {
     }
     web3Api.web3 && getAccount()
   }, [web3Api.web3])
+
+  useEffect(() => {
+    const loadBalance = async() => {
+      const { contract, web3 } = web3Api
+      const balance = await web3.eth.getBalance(contract.address)
+      setBalance(web3.utils.fromWei(balance, "ether"))
+    }
+
+    web3Api.contract && loadBalance()
+  }, [web3Api])
   
 
   return (
@@ -51,7 +63,7 @@ function App() {
             <h1>{ account ? account : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
           </div>
           <div className="balance-view is-size-2 my-4">
-            Current Balance: <strong>100</strong>
+            Current Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
           </div>
           <button className="button is-link is-rounded mr-2">Donate</button>
           <button className="button is-primary is-rounded">Withdraw</button>
