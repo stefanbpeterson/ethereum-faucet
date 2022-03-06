@@ -17,6 +17,16 @@ function App() {
 
   const reloadHelper = () => setReload(!reload)
 
+  const setAccountListener = (provider) => {
+    provider.on("accountsChanged", () => window.location.reload())
+    // provider._jsonRpcConnection.events.on("notification", (payload) => {
+    //   const { method } = payload
+    //   if (method === 'metamask_unlockStateChanged') {
+    //     setAccount(null)
+    //   }
+    // })
+  }
+
   useEffect(() => {
     const loadProvider = async() => {
 
@@ -24,6 +34,7 @@ function App() {
       const contract = await loadContract("Faucet", provider)
 
       if(provider) {
+        setAccountListener(provider)
         setweb3Api({
           provider,
           web3: new Web3(provider),
@@ -87,8 +98,8 @@ function App() {
           <div className="balance-view is-size-2 my-4">
             Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
           </div>
-          <button onClick={addFunds} className="button is-link is-rounded mr-2">Donate 1 Ether</button>
-          <button onClick={withdrawFunds} className="button is-primary is-rounded">Withdraw 1 Ether</button>
+          <button disabled={!account} onClick={addFunds} className="button is-link is-rounded mr-2">Donate 1 Ether</button>
+          <button disabled={!account} onClick={withdrawFunds} className="button is-primary is-rounded">Withdraw 1 Ether</button>
         </div>
       </div>
     </>
