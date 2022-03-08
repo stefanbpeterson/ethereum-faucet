@@ -100,7 +100,7 @@ function App() {
               <h1>{ account ? account : !web3Api.provider ? <><div className='notification is-warning is-rounded'>No wallet detected! <a target='_blank' href='https://docs.metamask.io'>Install MetaMask</a></div></> : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
             </div>
             :
-            <div className='is-size-1'>Web3 provider loading...</div>
+            <div className='is-size-5'>Web3 provider loading...</div>
           }
             <div className="balance-view is-size-2 my-4">
               Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
