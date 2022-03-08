@@ -31,9 +31,9 @@ function App() {
     const loadProvider = async() => {
 
       const provider = await detectEthereumProvider()
-      const contract = await loadContract("Faucet", provider)
 
       if(provider) {
+        const contract = await loadContract("Faucet", provider)
         setAccountListener(provider)
         setweb3Api({
           provider,
@@ -93,12 +93,12 @@ function App() {
         <div className="faucet">
           <div className='is-flex is-align-items-center'>
             <span className='mr-3'>Account:</span>
-            <h1>{ account ? account : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
+            <h1>{ account ? account : !web3Api.provider ? <><div className='notification is-warning is-rounded'>No wallet detected! <a target='_blank' href='https://docs.metamask.io'>Install MetaMask</a></div></> : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
           </div>
           <div className="balance-view is-size-2 my-4">
             Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
           </div>
-          <button disabled={!account} onClick={addFunds} className="button is-link is-rounded mr-2">Donate 1 Ether</button>
+          <button disabled={!account} onClick={addFunds} className="button is-link is-rounded mr-4">Donate 1 Ether</button>
           <button disabled={!account} onClick={withdrawFunds} className="button is-primary is-rounded">Withdraw 1 Ether</button>
         </div>
       </div>
