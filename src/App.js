@@ -8,6 +8,7 @@ var Web3 = require('web3')
 function App() {
   const [web3Api, setweb3Api] = useState({
     provider: null,
+    isProviderLoaded: false,
     web3: null,
     contract: null
   })
@@ -37,11 +38,13 @@ function App() {
         setAccountListener(provider)
         setweb3Api({
           provider,
+          isProviderLoaded: true,
           web3: new Web3(provider),
           contract
         })
       } else {
-          console.error('Please install Metamask')
+        setweb3Api({isProviderLoaded: true})
+        console.error('Please install Metamask')
       }
     }
     loadProvider()
@@ -91,13 +94,17 @@ function App() {
     <>
       <div className="faucet-wrapper">
         <div className="faucet">
-          <div className='is-flex is-align-items-center'>
-            <span className='mr-3'>Account:</span>
-            <h1>{ account ? account : !web3Api.provider ? <><div className='notification is-warning is-rounded'>No wallet detected! <a target='_blank' href='https://docs.metamask.io'>Install MetaMask</a></div></> : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
-          </div>
-          <div className="balance-view is-size-2 my-4">
-            Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
-          </div>
+          { web3Api.isProviderLoaded ?
+            <div className='is-flex is-align-items-center'>
+              <span className='mr-3'>Account:</span>
+              <h1>{ account ? account : !web3Api.provider ? <><div className='notification is-warning is-rounded'>No wallet detected! <a target='_blank' href='https://docs.metamask.io'>Install MetaMask</a></div></> : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
+            </div>
+            :
+            <div className='is-size-1'>Web3 provider loading...</div>
+          }
+            <div className="balance-view is-size-2 my-4">
+              Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
+            </div>
           <button disabled={!account} onClick={addFunds} className="button is-link is-rounded mr-4">Donate 1 Ether</button>
           <button disabled={!account} onClick={withdrawFunds} className="button is-primary is-rounded">Withdraw 1 Ether</button>
         </div>
