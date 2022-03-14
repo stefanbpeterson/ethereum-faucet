@@ -1,5 +1,4 @@
 import detectEthereumProvider from '@metamask/detect-provider'
-import react from "react"
 import "./App.css"
 import React, { useState, useEffect } from "react"
 import { loadContract } from "./utils/load-contract"
@@ -97,7 +96,7 @@ function App() {
           { web3Api.isProviderLoaded ?
             <div className='is-flex is-align-items-center'>
               <span className='mr-3'>Account:</span>
-              <h1>{ account ? account : !web3Api.provider ? <><div className='notification is-warning is-rounded'>No wallet detected! <a target='_blank' href='https://docs.metamask.io'>Install MetaMask</a></div></> : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
+              <h1>{ account ? account : !web3Api.provider ? <><div className='notification is-warning is-rounded'>No wallet detected! <a rel="noreferrer" target='_blank' href='https://docs.metamask.io'>Install MetaMask</a></div></> : <button onClick={() => web3Api.provider.request({method: "eth_requestAccounts"})} className='button is-rounded is-small'>Connect wallet</button>}</h1>
             </div>
             :
             <div className='is-size-5'>Web3 provider loading...</div>
