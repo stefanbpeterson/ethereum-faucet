@@ -14,11 +14,14 @@ function App() {
   const [account, setAccount] = useState(null)
   const [balance, setBalance] = useState(null)
   const [reload, setReload] = useState(false)
+  
+  const canConnectToWallet = account && web3Api.contract
 
   const reloadHelper = () => setReload(!reload)
 
   const setAccountListener = (provider) => {
     provider.on("accountsChanged", () => window.location.reload())
+    provider.on("chainChanged", () => window.location.reload())
     // provider._jsonRpcConnection.events.on("notification", (payload) => {
     //   const { method } = payload
     //   if (method === 'metamask_unlockStateChanged') {
@@ -101,11 +104,16 @@ function App() {
             :
             <div className='is-size-5'>Web3 provider loading...</div>
           }
-            <div className="balance-view is-size-2 my-4">
-              Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
-            </div>
-          <button disabled={!account} onClick={addFunds} className="button is-link is-rounded mr-4">Donate 1 Ether</button>
-          <button disabled={!account} onClick={withdrawFunds} className="button is-primary is-rounded">Withdraw 1 Ether</button>
+          <div className="balance-view is-size-2 my-4">
+            Current Faucet Balance: <strong>{ balance ? `${balance} Ether` : 'Balance not loaded'}</strong>
+          </div>
+
+          {
+            !canConnectToWallet && <i className='is-block'>Connect to Ganache</i>
+          }
+            
+          <button disabled={!canConnectToWallet} onClick={addFunds} className="button is-link is-rounded mr-4">Donate 1 Ether</button>
+          <button disabled={!canConnectToWallet} onClick={withdrawFunds} className="button is-primary is-rounded">Withdraw 1 Ether</button>
         </div>
       </div>
     </>
